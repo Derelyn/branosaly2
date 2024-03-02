@@ -64,7 +64,7 @@ const HomeLeft = () => {
       </Reveal>
       {/* button */}
       <div className="mt-6 md:mt-12">
-        <a className="group peer relative inline-flex cursor-pointer select-none items-center justify-center leading-normal no-underline focus:outline-none md:peer-even:ml-6">
+        <a href='CV_Branislav_Saly.pdf' download className="group peer relative inline-flex cursor-pointer select-none items-center justify-center leading-normal no-underline focus:outline-none md:peer-even:ml-6">
           <div className="z-10 flex h-full w-full transform-gpu border-4 border-transparent bg-white px-10 py-5 font-mono text-lg text-black transition-transform hover:translate-x-2 hover:translate-y-2 group-active:border-mlime-base">
             <span className="mx-auto">Download Resume</span>
           </div>

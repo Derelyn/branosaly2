@@ -31,7 +31,7 @@ const ContactMeRigth = () => {
   const handleSubmitEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const response = await fetchPostMail(formData);
-    if (response.status === "success") {
+    if (response?.status === "success") {
       setSignal("success");
       setFormData({
         firstName: "",
@@ -41,7 +41,7 @@ const ContactMeRigth = () => {
         phoneNumber: 0,
         message: "",
       });
-    } else if (response.status === "error") {
+    } else if (response?.status === "error") {
       setSignal("error");
     }
   };

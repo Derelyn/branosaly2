@@ -7,12 +7,6 @@ type DataType = {
   error?: string;
 };
 
-export const config = {
-  runtime: "edge",
-};
-
-// export const runtime = 'edge'
-
 const sendMail = async (
   req: NextApiRequest,
   res: NextApiResponse<DataType>,
