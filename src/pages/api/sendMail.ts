@@ -46,6 +46,9 @@ const sendMail = async (
   }
 };
 
-export const runtime = 'edge';
+export const config = {
+  matcher: '/api/sendMail',
+}
+
 
 export default sendMail;
