@@ -27,9 +27,9 @@ export const mediaContent = [
     link: "https://www.linkedin.com/in/branislav-%C5%A1%C3%A1ly-b8575b256/",
     icon: "simple-icons:linkedin",
   },
-  {
-    name: "GitHub",
-    link: "https://www.github.com/Derelyn",
-    icon: "codicon:github-inverted",
-  },
+  // {
+  //   name: "GitHub",
+  //   link: "https://www.github.com/Derelyn",
+  //   icon: "codicon:github-inverted",
+  // },
 ];
