@@ -5,7 +5,7 @@ export type OneProjectType = {
   description: string;
   technologies: string[];
   image: StaticImageData;
-  mobileImage: StaticImageData;
+  mobileImage?: StaticImageData;
   linkText?: string;
   redirect?: string;
 };
