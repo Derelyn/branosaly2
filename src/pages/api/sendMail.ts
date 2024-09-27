@@ -7,6 +7,8 @@ type DataType = {
   error?: string;
 };
 
+export const runtime = 'edge';
+
 const sendMail = async (
   req: NextApiRequest,
   res: NextApiResponse<DataType>,
@@ -45,10 +47,5 @@ const sendMail = async (
     res.status(500).json({ status: "error", error: error.message });
   }
 };
-
-export const config = {
-  matcher: '/api/sendMail',
-}
-
 
 export default sendMail;

@@ -8,6 +8,7 @@ import { OneProjectType } from "@/types/contentTypes";
 const ProjectCard = ({ item }: { item: OneProjectType }) => {
   // ** state
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoadedMobile, setIsLoadedMobile] = useState(false);
 
   return (
     <div
@@ -15,12 +16,8 @@ const ProjectCard = ({ item }: { item: OneProjectType }) => {
       className="dark:bg-gradient-mgray-900 group grid items-center bg-mgray-900 transition-all duration-200 md:grid-cols-2 md:gap-10 dark:md:shadow-lg"
     >
       {/* images with animation */}
-      <a
-        href=""
-        aria-label="project1"
-        className="relative block h-80 w-full p-4"
-      >
-        <div className="relative h-full w-full overflow-hidden transition-transform duration-300 ease-out md:group-hover:scale-105">
+      <div className="relative block h-80 w-full p-4">
+        <div className="relative h-full w-11/12 overflow-hidden transition-transform duration-300 ease-out md:group-hover:scale-105">
           <div
             className={classNames(
               "absolute left-0 top-0 z-10 hidden h-full w-[120%] origin-bottom skew-x-6 transform-gpu bg-mgray-900 transition-transform duration-700 md:block",
@@ -36,20 +33,34 @@ const ProjectCard = ({ item }: { item: OneProjectType }) => {
           />
 
           {/* mobile variant */}
-          {/* <div className="absolute top-0 right-4 z-10 h-full w-full">
-          <div className="relative overflow-hidden h-full w-full transition-transform md:group-hover:scale-105 origin-right duration-500 ease-out drop-shadow-2xl">
-            <div className="absolute left-0 top-0 z-10 hidden h-full w-[120%] bg-mgray-900 origin-bottom skew-x-6 transform-gpu transition-transform duration-700"></div>
-            <img className="md:transform-gpu md:transition-all md:duration-700 object-contain object-right image-portfolio" />
-          </div>
-        </div> */}
+          {item.mobileImage && (
+            <div className="absolute right-4 top-0 z-10 h-full w-full">
+              <div className="relative h-full w-full origin-right overflow-hidden drop-shadow-2xl transition-transform duration-500 ease-out md:group-hover:scale-105">
+                {/* <div
+                  className={classNames(
+                    "absolute left-0 top-0 z-10 hidden h-full w-[120%] origin-bottom skew-x-6 transform-gpu bg-mgray-900 transition-transform duration-700",
+                  )}
+                ></div> */}
+
+                <Image
+                  onLoad={() => setIsLoadedMobile(true)}
+                  alt="item-image-mobile"
+                  src={item.mobileImage}
+                  className={classNames(
+                    "image-portfolio object-contain object-right md:transform-gpu  md:transition-all md:duration-700",
+                    { "md:opacity-0": !isLoadedMobile },
+                  )}
+                />
+              </div>
+            </div>
+          )}
         </div>
-      </a>
+      </div>
       <div className="p-4 md:p-10 md:pl-0">
-        <a aria-label="project1" href="" className="">
-          <h4 className="group-hover:text-accent mt-6 transition-colors dark:group-hover:text-mlime-base">
-            {item.title}
-          </h4>
-        </a>
+        <h4 className="group-hover:text-accent mt-6 transition-colors dark:group-hover:text-mlime-base">
+          {item.title}
+        </h4>
+
         <small className="mt-6 block">
           {item.description}&nbsp;
           {item.linkText && (

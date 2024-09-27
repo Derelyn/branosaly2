@@ -89,20 +89,18 @@ const aboutMeContent = {
     {
       no: "01",
       title: "About me",
-      content:
-        "I am from a small town called Nová Baňa and right now I'm based in Bratislava. I am a man, who learned to code at home in my free time and gained more experience in the field. I've taken many online courses in web development with focus on front-end and full-stack development, and I am always curious to learn something new.",
+      content: `I grew up in the small town of Nová Baňa and am now based in Bratislava. My journey into coding started thanks to my friends, who are programmers. Their work sparked my curiosity, and I soon found myself diving into coding during my free time. I've transformed that curiosity into expertise, completing various online courses in web development, with a strong focus on frontend and full-stack technologies. I'm constantly exploring new tools and techniques to expand my skill set and stay up to date in the ever-evolving world of development`,
     },
     {
       no: "02",
       title: "Interests and hobbies",
-      content:
-        "I love all kinds of music, especially rock, metal, melodic EDM/dubstep and syntwave. I'm also, or more specifically I was, a musician myself in which I prefered guitar and drums. I also love exploring new places, reading all kinds of books and going out with my friends on a homebrew beer, good a food or just simply play some board games.",
+      content: `Music has always been a big part of my life, with a love for genres like rock, metal and melodic EDM/dubstep. I used to play guitar and drums, so I've always had a strong connection to the music world. Outside of that, I enjoy exploring new places, reading a wide range of books, and spending time with friends over homebrewed beer, good food, or board games.`,
     },
     {
       no: "03",
       title: "Work preferences",
       content:
-        "I amd mainly front-end developer, but I also have some experience with back-end technologies. So in short, full-stack with main focus on front-end but it doesn't mean that I am not open to new things (I love new tech as I mentioned). I have no problem working home-office/hybrid or on-site, but I prefer hybrid.",
+        "I specialize in frontend development but also have experience with back-end technologies, making me a versatile full-stack developer with a primary focus on the frontend. I'm always eager to embrace new technologies and challenges. I'm comfortable with home-office, hybrid, or on-site arrangements, though I prefer a hybrid setup for the best of both worlds.",
     },
   ],
   history: [
@@ -143,8 +141,8 @@ const aboutMeContent = {
     },
   ],
   img: {
-    name: "Branislav Šály",
-    buzzwords: "Are you ready?",
+    name: "BRANISLAV ŠÁLY",
+    buzzwords: "Interested?",
   },
 };
 

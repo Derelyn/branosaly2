@@ -2,8 +2,11 @@ import { useState } from "react";
 import classNames from "clsx";
 import aboutMeContent from "@/content/aboutMeContent";
 
+// ** components
+import HoverMovingButton from "@/views/components/buttons/hoverMovingButton";
+
 // ** imgs
-import myPhoto3 from "public/imgs/myPhoto3.jpg";
+import myPhoto3 from "public/imgs/myPhoto4.webp";
 import Image from "next/image";
 
 const AboutImageLeft = () => {
@@ -28,13 +31,14 @@ const AboutImageLeft = () => {
             priority
           />
         </div>
-        <div className='class="absolute to-black/90" left-0 top-0 z-20 h-full w-full bg-gradient-to-b from-transparent via-transparent'></div>
+        <div className="absolute left-0 top-0 z-20 h-full w-full bg-gradient-to-b from-transparent via-transparent to-black/90"></div>
       </div>
       <div className="z-10 bg-black p-6 text-center">
-        <h3 className="inline">{aboutMeContent.img.name}</h3>
+        <h3 className="inline, text-white">{aboutMeContent.img.name}</h3>
       </div>
       <div className="z-10 p-6 text-center md:p-8">
-        <h2>{aboutMeContent.img.buzzwords}</h2>
+        <h2 className="text-white">{aboutMeContent.img.buzzwords}</h2>
+        <HoverMovingButton buttonContent="Contact Me" href="/contact" />
       </div>
     </div>
   );

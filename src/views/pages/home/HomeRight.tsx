@@ -3,8 +3,8 @@ import { useState } from "react";
 import classNames from "clsx";
 
 // ** images
-import myPhoto3 from "public/imgs/myPhoto3.jpg";
-import myPhoto3Square from "public/imgs/myPhoto3-square.jpg";
+import myPhoto3 from "public/imgs/myPhoto3.webp";
+import myPhoto3Square from "public/imgs/myPhoto3-square.webp";
 import Image from "next/image";
 
 const HomeRight = () => {

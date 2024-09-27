@@ -4,7 +4,7 @@ import HomeRight from "@/views/pages/home/HomeRight";
 
 const Home = () => {
   return (
-    <div className="m-auto p-4 md:p-10 lg:p-20 md:flex md:text-left text-center items-center">
+    <div className="my-10 items-center p-4 text-center md:m-auto md:flex md:p-10 md:text-left lg:p-20">
       <HomeRight />
       <HomeLeft />
     </div>

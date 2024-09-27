@@ -1,47 +1,57 @@
 // ** imgs
-import myWebsiteImg from "public/imgs/myWebsiteImg.png";
-import iotmedImg from "public/imgs/iotmedImg.png";
-import ivfImg from "public/imgs/ivfImg.png";
-import yelpPlaceImg from "public/imgs/yelpPlaceImg.png";
-import socialmediaImg from "public/imgs/socialmediaImg.png";
-import jobifyImg from "public/imgs/jobifyImg.png";
-import myWebsite1Img from "public/imgs/myWebsite1Img.png";
-import comingSoonImg from "public/imgs/comingSoonImg.webp";
+import myWebsiteImg from "public/imgs/projects/myWebsite.webp";
+import iotmedImg from "public/imgs/projects/iotmed.webp";
+import ivfImg from "public/imgs/projects/ivf.webp";
+import yelpPlaceImg from "public/imgs/projects/yelpPlace.webp";
+import socialmediaImg from "public/imgs/projects/socialmedia.webp";
+import jobifyImg from "public/imgs/projects/jobify.webp";
+import enviroImg from "public/imgs/projects/enviro.webp";
+import myWebsite1Img from "public/imgs/projects/myWebsite1.webp";
+import myWebsiteMobileImg from "public/imgs/projects/myWebsiteMobile.webp";
+import enviroMobileImg from "public/imgs/projects/enviroMobile.webp";
+import iotmedMobileImg from "public/imgs/projects/iotmedMobile.webp";
+import ivfMobileImg from "public/imgs/projects/ivfMobile.webp";
+import comingSoonImg from "public/imgs/projects/comingSoon.webp";
 
 export const projectsContent = {
-  title: "Projects I was working on",
+  title: "Latest projects I was working on",
   otherProjectsTitle: "Other projects",
   otherProjectsDescription:
     "Those are very simple projects I was working on while learning new technologies. They are not as complex as projects above but I learned a lot from them.",
   projects: [
     {
-      title: "Crypto App",
+      title: "Enviro project",
       description:
-        "Project I am working on right now with my friend who is expert in crypto world. I just do full-stack app :)",
-      technologies: ["Next.js", "MUI", "Stripe"],
-      image: comingSoonImg,
+        "I developed the frontend for a dashboard visualizing data from specialized meteorological stations created by doctors at FEI STU. The stations were displayed on interactive Leaflet maps, allowing users to monitor weather conditions in real-time. Built on top of the IoTMed project, this platform provided a seamless interface for accessing and analyzing environmental data.",
+      redirect: "/projects/my-first-website",
+      technologies: ["Next.js", "MUI", "Axios", "Leaflet"],
+      image: enviroImg,
+      mobileImage: enviroMobileImg,
     },
     {
       title: "My personal website",
       description:
-        "It's the web page you are currently on. I created it to showcase my skills and projects I was working on. Fisrt version was created in Vite but I needed to update design and wanted to add contact me page so for v2.0 I choosed Next.js.",
+        "This is the website you're currently browsing, which I built to showcase my skills and projects. The first version was developed using React and Vite, but for version 2.0, I redesigned the site and added a 'Contact Me' page, transitioning the project to Next.js for improved performance and SEO capabilities.",
       redirect: "/projects/my-first-website",
-      technologies: ["Next.js", "TailwindCSS"],
+      technologies: ["Next.js", "TailwindCSS", "nodemailer"],
       image: myWebsiteImg,
+      mobileImage: myWebsiteMobileImg,
+    },
+    {
+      title: "IoTMed",
+      description:
+        "Expanding on a previous IVF project. The platform integrates with our medical devices called Coins and also with other commercial devices such as Garmin and Omron to track patient metrics. My role involved creating a responsive, user-friendly system that allowed healthcare professionals to manage devices, patients, receive real-time alerts, and visualize patient data. Patients had mobile app where they could check their data.",
+      technologies: ["Next.js", "MUI", "Axios", "Keycloak"],
+      image: iotmedImg,
+      mobileImage: iotmedMobileImg,
     },
     {
       title: "IVF",
       description:
-        "This project was about creating a web and mobile application for IVF clinics. It's a complex system with many features like scheduling appointments, managing patients, creating medical reports, messaging, tasks system, calendar, adding and downloading files, etc. I was working on frontend part of the project alone.",
+        "I independently developed the frontend for a comprehensive web and mobile application designed for IVF clinics. The system included a wide range of features, such as appointment scheduling, patient management, medical report creation, messaging, task management, file handling and much more. My work focused on building an intuitive, user-friendly interface that seamlessly handled these complex functionalities across both web and mobile platforms.",
       technologies: ["Next.js", "MUI", "Axios", "Keycloak", "Capacitor"],
       image: ivfImg,
-    },
-    {
-      title: "IOTMED",
-      description:
-        "Because of success of previous project (IVF), this project is build on top of IVF system. My company had a project with devices called Coins, that were mesuring all kinds of medical values of patients. Later with added connection on all sort of devices mainly Garmin and Omron. There are some new features like managing devices, alerting doctors if something is bad, plotting charts for devices data and ekg/ecg, etc.",
-      technologies: ["Next.js", "MUI", "Axios", "Keycloak"],
-      image: iotmedImg,
+      mobileImage: ivfMobileImg,
     },
   ],
   otherProjects: [
