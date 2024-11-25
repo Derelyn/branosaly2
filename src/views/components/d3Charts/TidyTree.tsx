@@ -72,7 +72,7 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
       // Adjust node width based on text length
       let maxTextWidth = 0;
       nodes.forEach((d) => {
-        const textWidth = d.data.name.length * 7; // Approximate width
+        const textWidth = d.data.name.length * 7 + 40; // Approximate width
         if (textWidth > maxTextWidth) {
           maxTextWidth = textWidth;
         }
