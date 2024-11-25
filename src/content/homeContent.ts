@@ -11,7 +11,7 @@ const homeContent = {
     },
     {
       number: "5+",
-      text: "Worked on projects",
+      text: "Completed projects",
       color: "text-mgreen-base",
     },
     {

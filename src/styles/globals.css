@@ -103,6 +103,10 @@ small {
   font-weight: 500;
 }
 
+svg {
+  width: 100%;
+}
+
 .text-gradient-lime {
   background: linear-gradient(90deg, #b0f50e 0%, #54d642 60%);
   -webkit-background-clip: text;

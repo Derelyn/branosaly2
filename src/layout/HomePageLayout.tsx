@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 // ** import components
 import Navbar from "./components/Navbar";
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const HomePageLayout = ({ children }: { children: ReactNode }) => {
   return (
     <main className="dark relative flex min-h-screen w-full justify-center bg-black font-sans lg:px-4 xl:px-8">
       <div className="fixed bottom-0 left-0 z-50 hidden w-full bg-black md:block lg:h-4 xl:h-8"></div>
@@ -22,4 +22,4 @@ const Layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default Layout;
+export default HomePageLayout;
