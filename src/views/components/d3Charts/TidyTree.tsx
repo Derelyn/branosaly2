@@ -1,5 +1,3 @@
-// src/TreeChart.tsx
-
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 
@@ -11,6 +9,10 @@ interface TreeNode {
 interface TreeChartProps {
   data: TreeNode;
   searchQuery: string;
+  collapseTrigger: {
+    open: number;
+    close: number;
+  };
 }
 
 interface CustomHierarchyNode extends d3.HierarchyNode<TreeNode> {
@@ -22,8 +24,13 @@ interface CustomHierarchyNode extends d3.HierarchyNode<TreeNode> {
   _children?: CustomHierarchyNode[];
 }
 
-const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
+const TreeChart: React.FC<TreeChartProps> = ({
+  data,
+  searchQuery,
+  collapseTrigger,
+}) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
+
   const [root, setRoot] = useState<CustomHierarchyNode | null>(null);
   const [svgWidth, setSvgWidth] = useState<number>(0);
   const [svgHeight, setSvgHeight] = useState<number>(0);
@@ -48,17 +55,21 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
     const svgElement = d3.select(svgRef.current);
     svgElement.selectAll("*").remove();
 
-    const margin = { top: 50, right: 120, bottom: 10, left: 200 };
+    const margin = { top: 64, right: 120, bottom: 32, left: 224 };
     const duration = 400;
-    let nodeWidth = 180;
-    const nodeHeight = 22;
+    const nodeWidth = 510;
+    const nodeHeight = 21.3;
 
     const g = svgElement.append("g");
     const treeLayout = d3.tree<TreeNode>().nodeSize([nodeHeight, nodeWidth]);
 
     // Collapse nodes only if there's no search query
-    if (root.children && !searchQuery) {
-      collapse(root);
+    if (!searchQuery) {
+      if (collapseTrigger.close > 0) {
+        collapse(root);
+      } else if (collapseTrigger.open > 0) {
+        expand(root);
+      } else collapse(root);
     }
 
     update(root);
@@ -69,28 +80,32 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
       const nodes = treeData.descendants() as CustomHierarchyNode[];
       const links = treeData.links();
 
-      // Adjust node width based on text length
-      let maxTextWidth = 0;
-      nodes.forEach((d) => {
-        const textWidth = d.data.name.length * 7 + 40; // Approximate width
-        if (textWidth > maxTextWidth) {
-          maxTextWidth = textWidth;
-        }
+      treeLayout.separation(function (a, b) {
+        // how big nodes separation will be
+        const depthSeparation: Record<number, number> = {
+          1: 1.5, // second-level nodes
+          2: 1, // third-level nodes
+        };
+
+        const sepA = depthSeparation[a.depth] || 1;
+        const sepB = depthSeparation[b.depth] || 1;
+
+        return (sepA + sepB) / 2;
       });
-      nodeWidth = Math.max(180, maxTextWidth + 10);
-      treeLayout.nodeSize([nodeHeight, nodeWidth]);
+
       treeLayout(root);
 
-      // Adjust y positions based on depth
-      const minSpacing = 1; // Minimum horizontal spacing
+      // length of line
       nodes.forEach((d) => {
-        const depthSpacing = nodeWidth - d.depth * 80; // Decrease by 80px per depth
-        d.y = d.depth * Math.max(depthSpacing, minSpacing);
+        const depthSpacing = nodeWidth - d.depth * 80;
+        d.y = d.depth * depthSpacing;
       });
 
+      const maxY = d3.max(nodes, (d) => d.y) || 0;
       const xExtent = d3.extent(nodes, (d) => d.x) as [number, number];
-      const yExtent = d3.extent(nodes, (d) => d.y) as [number, number];
+      const yExtent: [number, number] = [0, maxY]; // Start from 0 to maxY
 
+      // ** SVG width/height calculation
       const computedSvgWidth =
         yExtent[1] - yExtent[0] + margin.left + margin.right;
       const computedSvgHeight =
@@ -138,9 +153,11 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
           d.children || d._children ? "end" : "start",
         )
         .text((d) => d.data.name)
-        .style("font-size", "12px")
+        .style("font-size", "15px")
         .style("fill", "#F6F7F8")
-        .attr("paint-order", "stroke");
+        .attr("paint-order", "stroke")
+        .style("font-weight", "600")
+        .style("cursor", "pointer");
 
       const nodeUpdate = nodeEnter.merge(node);
 
@@ -151,7 +168,7 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
 
       nodeUpdate
         .select("circle")
-        .attr("fill", (d) => (d._children ? "#555" : "#999"))
+        .attr("fill", (d) => (d._children ? "#EC6608" : "#EC6608"))
         .attr("r", 5);
 
       const nodeExit = node
@@ -172,14 +189,21 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
         // @ts-ignore
         .data(links, (d) => d.target.id);
 
+      // ** link/line style
       const linkEnter = link
         .enter()
         .insert("path", "g")
         .attr("class", "link")
         .attr("fill", "none")
-        .attr("stroke", "white")
-        .attr("stroke-opacity", 0.4)
-        .attr("stroke-width", 1.5)
+        .attr("stroke", (d) => {
+          if (d.target.children) {
+            return "red";
+          } else {
+            return "white";
+          }
+        })
+        .attr("stroke-opacity", 0.3)
+        .attr("stroke-width", 2.5)
         .attr("d", () => {
           const o = { x: source.x0 || 0, y: source.y0 || 0 };
           return diagonal(o, o);
@@ -191,9 +215,17 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
         .transition()
         .duration(duration)
         // @ts-ignore
-        .attr("d", (d) => diagonal(d.source, d.target));
+        .attr("d", (d) => diagonal(d.source, d.target))
+        .attr("stroke", (d) => {
+          // If the target node is expanded (has children), color the link red
+          if (d.target.children) {
+            return "#EC6608";
+          } else {
+            return "white";
+          }
+        });
 
-      const linkExit = link
+      link
         .exit()
         .transition()
         .duration(duration)
@@ -229,6 +261,14 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
       }
     }
 
+    function expand(d: CustomHierarchyNode) {
+      if (d._children) {
+        d.children = d._children;
+        d._children = undefined;
+        d.children.forEach(expand);
+      }
+    }
+
     function diagonal(
       s: { x: number; y: number },
       d: { x: number; y: number },
@@ -238,7 +278,7 @@ const TreeChart: React.FC<TreeChartProps> = ({ data, searchQuery }) => {
                 ${(s.y + d.y) / 2} ${d.x},
                 ${d.y} ${d.x}`;
     }
-  }, [root, searchQuery]);
+  }, [root, searchQuery, collapseTrigger]);
 
   return (
     <div style={{ overflow: "auto", whiteSpace: "nowrap" }}>

@@ -39,7 +39,7 @@ const useGetXlsx = ({ removeColumns }: UseGetXlsxProps) => {
         const { transformedCameraData } = processRawData({
           sheetData: sheetData.map((item) => ({
             name: item.name,
-            data: item.data as CameraDataRaw[], // Type assertion
+            data: item.data as CameraDataRaw[],
           })),
         });
 
@@ -58,11 +58,11 @@ const useGetXlsx = ({ removeColumns }: UseGetXlsxProps) => {
       const newData = data.data.map((row: CameraDataRaw) => {
         const newRow: any = {};
         Object.keys(row).forEach((key) => {
-          const newKey = removeDiacriticsAndFormat(key); // Transform key
-          if (removeColumns?.some((col) => col === newKey)) return; // return if col should be there
-          newRow[newKey] = row[key as keyof CameraDataRaw]; // Assign value to new key
+          const newKey = removeDiacriticsAndFormat(key);
+          if (removeColumns?.some((col) => col === newKey)) return;
+          newRow[newKey] = row[key as keyof CameraDataRaw];
         });
-        return { ...newRow }; // Return new row
+        return { ...newRow };
       });
       return { name: data.name, children: newData };
     });
@@ -73,8 +73,6 @@ const useGetXlsx = ({ removeColumns }: UseGetXlsxProps) => {
 
     return { transformedCameraData };
   };
-
-  // if (!cameraData) return <div>Loading...</div>;
 
   return { cameraData };
 };

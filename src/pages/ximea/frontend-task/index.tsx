@@ -1,17 +1,22 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import TidyTree from "@/views/components/d3Charts/TidyTree";
-import SearchField from "@/views/components/forms/SearchField";
+
 import useGetXlsx from "@/services/hooks/useGetXlsx";
+
+// ** components
+import NavbarX from "@/views/pages/ximea/components/NavBarX";
 
 const FrontendTask = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCamera, setSelectedCamera] = useState<any[]>([]);
+  const [collapseTrigger, setCollapseTrigger] = useState({ open: 0, close: 0 });
 
   const removeColumns = ["SK", "SK_1", "AltKVKDatumu"];
   const camerasData = useGetXlsx({ removeColumns });
 
-  // Recursive function to filter the tree
+  // filter the tree
   const filterTree = (node: any, query: string) => {
     const nameMatches = node.name.toLowerCase().includes(query.toLowerCase());
 
@@ -32,32 +37,46 @@ const FrontendTask = () => {
     return nameMatches ? { ...node } : null;
   };
 
-  // Use useMemo to compute the filtered cameras data
   const cameras = useMemo(() => {
     if (!camerasData.cameraData) return [];
-    if (searchQuery === "") {
+
+    let selected;
+
+    if (selectedCamera.length > 0) selected = selectedCamera;
+    else selected = camerasData.cameraData;
+
+    if (searchQuery === "" && selectedCamera.length < 1) {
       return camerasData.cameraData;
     } else {
-      // Filter cameras based on the search query
-      const filteredData = camerasData.cameraData
+      // search
+      const filteredData = selected
         .map((camera) => filterTree(camera, searchQuery))
         .filter((camera) => camera != null);
+
       return filteredData;
     }
-  }, [camerasData.cameraData, searchQuery]);
+  }, [camerasData.cameraData, searchQuery, selectedCamera]);
 
   return (
     <>
       <Box sx={{ p: 4, pl: 8 }}>
-        <SearchField
+        <NavbarX
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          setSelectedCamera={setSelectedCamera}
+          data={camerasData.cameraData}
+          setCollapseTrigger={setCollapseTrigger}
         />
       </Box>
       <div>
         {cameras.length > 0 &&
-          cameras.map((data, i) => (
-            <TidyTree key={i} data={data} searchQuery={searchQuery} />
+          cameras.map((data) => (
+            <TidyTree
+              key={data.name}
+              data={data}
+              searchQuery={searchQuery}
+              collapseTrigger={collapseTrigger}
+            />
           ))}
       </div>
     </>
