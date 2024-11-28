@@ -11,7 +11,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import SearchField from "@/views/components/forms/SearchField";
 
 type NavbarXProps = {
-  searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   data: any[];
   setSelectedCamera: React.Dispatch<React.SetStateAction<any[]>>;
@@ -24,7 +23,6 @@ type NavbarXProps = {
 };
 
 const NavbarX = ({
-  searchQuery,
   setSearchQuery,
   data,
   setSelectedCamera,
@@ -47,7 +45,15 @@ const NavbarX = ({
         sx={{ borderRadius: "4px", backgroundColor: "#2F2F2F" }}
       >
         <Toolbar>
-          <Grid container sx={{ display: "flex",      alignItems: "center", flexGrow: 1, my: "1rem" }}>
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexGrow: 1,
+              my: "1rem",
+            }}
+          >
             <Grid
               sx={{
                 flexGrow: 1,
@@ -57,11 +63,7 @@ const NavbarX = ({
                 gap: 2,
               }}
             >
-              <SearchField
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-              />
-
+              <SearchField setSearchQuery={setSearchQuery} />
               <Autocomplete
                 multiple
                 sx={{ width: "calc(250px + 2vw)" }}
@@ -88,12 +90,13 @@ const NavbarX = ({
                 color="warning"
                 variant="contained"
                 sx={{ borderRadius: "25px" }}
-                onClick={() =>
+                onClick={() => {
                   setCollapseTrigger((prev) => ({
                     close: 0,
                     open: prev.open + 1,
-                  }))
-                }
+                  }));
+                  setSearchQuery("");
+                }}
               >
                 Expand all
               </Button>
@@ -101,12 +104,13 @@ const NavbarX = ({
                 color="warning"
                 variant="contained"
                 sx={{ borderRadius: "25px", ml: 2 }}
-                onClick={() =>
+                onClick={() => {
                   setCollapseTrigger((prev) => ({
                     open: 0,
                     close: prev.close + 1,
-                  }))
-                }
+                  }));
+                  setSearchQuery("");
+                }}
               >
                 Close all
               </Button>

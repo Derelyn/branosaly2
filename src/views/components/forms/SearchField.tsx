@@ -5,12 +5,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 
 type PropsType = {
-  searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SearchField = ({ searchQuery, setSearchQuery }: PropsType) => {
-  const [searchTerm, setSearchTerm] = useState("")
+const SearchField = ({ setSearchQuery }: PropsType) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
   const debouncedSetSearchTerm = useCallback(
     debounce((value) => setSearchQuery(value), 200),
@@ -18,7 +17,7 @@ const SearchField = ({ searchQuery, setSearchQuery }: PropsType) => {
   );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
+    setSearchTerm(e.target.value);
     debouncedSetSearchTerm(e.target.value);
   };
 

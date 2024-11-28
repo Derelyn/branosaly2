@@ -1,6 +1,6 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo } from "react";
 
-import { Box, Button } from "@mui/material";
+import Box from "@mui/material/Box";
 import TidyTree from "@/views/components/d3Charts/TidyTree";
 
 import useGetXlsx from "@/services/hooks/useGetXlsx";
@@ -61,7 +61,6 @@ const FrontendTask = () => {
     <>
       <Box sx={{ p: 4, pl: 8 }}>
         <NavbarX
-          searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           setSelectedCamera={setSelectedCamera}
           data={camerasData.cameraData}
