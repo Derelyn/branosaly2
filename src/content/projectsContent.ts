@@ -11,7 +11,6 @@ import myWebsiteMobileImg from "public/imgs/projects/myWebsiteMobile.webp";
 import enviroMobileImg from "public/imgs/projects/enviroMobile.webp";
 import iotmedMobileImg from "public/imgs/projects/iotmedMobile.webp";
 import ivfMobileImg from "public/imgs/projects/ivfMobile.webp";
-import comingSoonImg from "public/imgs/projects/comingSoon.webp";
 
 export const projectsContent = {
   title: "Latest projects I was working on",
