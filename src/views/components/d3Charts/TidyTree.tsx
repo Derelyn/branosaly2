@@ -282,7 +282,7 @@ const TreeChart: React.FC<TreeChartProps> = ({
 
   return (
     <div style={{ overflow: "auto", whiteSpace: "nowrap" }}>
-      <svg ref={svgRef} width={svgWidth} height={svgHeight}></svg>
+      <svg className="svg-width" ref={svgRef} width={svgWidth} height={svgHeight}></svg>
     </div>
   );
 };

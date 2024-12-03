@@ -11,10 +11,9 @@
   "dependencies": {
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
-    "@iconify/react": "^4.1.1",
+    "@iconify/react": "^5.0.2",
     "@mui/icons-material": "^6.1.8",
     "@mui/material": "^6.1.8",
-  
     "@types/nodemailer": "^6.4.16",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
