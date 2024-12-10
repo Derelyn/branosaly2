@@ -82,7 +82,6 @@ const NavbarX = ({
               sx={{
                 mt: { xs: "1rem", md: 0 },
                 display: "flex",
-
                 alignItems: "center",
               }}
             >

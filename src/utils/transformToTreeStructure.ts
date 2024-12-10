@@ -1,22 +1,8 @@
-interface Part {
-  Pozicia: string;
-  RegistracneCislo_1: string;
-  name: string;
-  MNF: number;
-  MJEvidencia: string;
-  CelkovaKalkulacnaCena: number;
-}
-
-interface CameraPart {
-  RegistracneCislo: string;
-  name: string;
-  children: Part[];
-}
-
-interface TransformedCameraData {
-  name: string;
-  children: CameraPart[];
-}
+// ** types
+import type {
+  TransformedCameraData,
+  CameraPart,
+} from "@/types/xlsxDataTypes/cameraStructure";
 
 export function transformXlxsToTreeStructure(
   input: any[],

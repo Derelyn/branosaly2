@@ -24,13 +24,11 @@ interface CustomHierarchyNode extends d3.HierarchyNode<TreeNode> {
   _children?: CustomHierarchyNode[];
 }
 
-const TreeChart: React.FC<TreeChartProps> = ({
-  data,
-  searchQuery,
-  collapseTrigger,
-}) => {
+const TreeChart = ({ data, searchQuery, collapseTrigger }: TreeChartProps) => {
+  // ** refs
   const svgRef = useRef<SVGSVGElement | null>(null);
 
+  // ** states
   const [root, setRoot] = useState<CustomHierarchyNode | null>(null);
   const [svgWidth, setSvgWidth] = useState<number>(0);
   const [svgHeight, setSvgHeight] = useState<number>(0);
@@ -183,11 +181,11 @@ const TreeChart: React.FC<TreeChartProps> = ({
 
       // Update the links
       const link = g
-        .selectAll<SVGPathElement, d3.HierarchyPointLink<CustomHierarchyNode>>(
-          "path.link",
-        )
-        // @ts-ignore
-        .data(links, (d) => d.target.id);
+        .selectAll<
+          SVGPathElement,
+          d3.HierarchyPointLink<CustomHierarchyNode>
+        >("path.link")
+        .data(links, (d) => d.target.id as string);
 
       // ** link/line style
       const linkEnter = link
@@ -217,7 +215,7 @@ const TreeChart: React.FC<TreeChartProps> = ({
         // @ts-ignore
         .attr("d", (d) => diagonal(d.source, d.target))
         .attr("stroke", (d) => {
-          // If the target node is expanded (has children), color the link red
+          // If the target node is expanded (has children), color the link
           if (d.target.children) {
             return "#EC6608";
           } else {
@@ -282,7 +280,12 @@ const TreeChart: React.FC<TreeChartProps> = ({
 
   return (
     <div style={{ overflow: "auto", whiteSpace: "nowrap" }}>
-      <svg className="svg-width" ref={svgRef} width={svgWidth} height={svgHeight}></svg>
+      <svg
+        className="svg-width"
+        ref={svgRef}
+        width={svgWidth}
+        height={svgHeight}
+      ></svg>
     </div>
   );
 };

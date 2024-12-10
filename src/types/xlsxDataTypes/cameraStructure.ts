@@ -33,3 +33,23 @@ export interface CameraStructureProcessed {
   name: string;
   children: CameraDataProcessed[];
 }
+
+export interface TransformedCameraData {
+  name: string;
+  children: CameraPart[];
+}
+
+export interface Part {
+  Pozicia: string;
+  RegistracneCislo_1: string;
+  name: string;
+  MNF: number;
+  MJEvidencia: string;
+  CelkovaKalkulacnaCena: number;
+}
+
+export interface CameraPart {
+  RegistracneCislo: string;
+  name: string;
+  children: Part[];
+}

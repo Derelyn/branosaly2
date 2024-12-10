@@ -1,5 +1,3 @@
-import React from "react";
-
 // ** MUI
 import { useScrollTrigger, Zoom, Fab } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -10,7 +8,7 @@ const ScrollToTopButton: React.FC = () => {
     threshold: 200,
   });
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",

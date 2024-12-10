@@ -4,15 +4,17 @@ import Link from "next/link";
 // ** import components
 import HoverMovingButtonContent from "./HoverMovingButtonContent";
 
+type HoverMovingButtonProps = {
+  buttonContent: string;
+  href: string;
+  download?: boolean;
+};
+
 const HoverMovingButton = ({
   buttonContent,
   href,
   download,
-}: {
-  buttonContent: string;
-  href: string;
-  download?: boolean;
-}) => {
+}: HoverMovingButtonProps) => {
   return (
     <div className="mt-6 md:mt-12">
       {download ? (
